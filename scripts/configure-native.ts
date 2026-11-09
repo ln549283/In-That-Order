@@ -1,0 +1,13 @@
+import { readFileSync,writeFileSync } from 'node:fs';
+import { loadEnv } from 'vite';
+const env={...loadEnv('production',process.cwd(),''),...process.env};
+const appId=(key:string,fallback:string)=>{const v=env[key]||fallback;if(!/^ca-app-pub-\d{16}~\d{10}$/.test(v))throw new Error(`Invalid ${key}`);return v;};
+const androidId=appId('ADMOB_ANDROID_APP_ID','ca-app-pub-3940256099942544~3347511713');
+const iosId=appId('ADMOB_IOS_APP_ID','ca-app-pub-3940256099942544~1458002511');
+writeFileSync('android/app/src/main/res/values/admob.xml',`<?xml version="1.0" encoding="utf-8"?>\n<resources><string name="admob_app_id">${androidId}</string></resources>\n`);
+const file='ios/App/App/Info.plist';let plist=readFileSync(file,'utf8');
+if(plist.includes('<key>GADApplicationIdentifier</key>'))plist=plist.replace(/(<key>GADApplicationIdentifier<\/key>\s*<string>)[^<]*(<\/string>)/,`$1${iosId}$2`);
+else plist=plist.replace('<dict>',`<dict>\n<key>GADApplicationIdentifier</key><string>${iosId}</string>`);
+writeFileSync(file,plist);
+console.log('Native public AdMob application identifiers configured. No ads enabled by this command.');
+if(!env.ADMOB_ANDROID_APP_ID||!env.ADMOB_IOS_APP_ID)console.log('Official Google SAMPLE app identifiers used where publisher identifiers are absent. Run release:check before distribution.');

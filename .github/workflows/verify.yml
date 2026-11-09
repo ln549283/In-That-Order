@@ -1,0 +1,67 @@
+name: Verify game and native builds
+on:
+  push:
+    branches: [main, work]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  game:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - name: Select Chromium
+        run: echo "CHROMIUM_PATH=$(node --input-type=module -e 'import {chromium} from "@playwright/test"; console.log(chromium.executablePath())')" >> "$GITHUB_ENV"
+      - run: npm run test:e2e
+      - run: npm run build
+      - run: node scripts/check-offline.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-and-screenshots
+          path: |
+            dist/
+            release/screenshots/
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - run: npm ci && npm run mobile:sync
+      - run: ./gradlew --no-daemon --max-workers=2 assembleDebug bundleRelease
+        working-directory: android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-testing-only
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci && npm run mobile:sync
+      - name: Build unsigned simulator app
+        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/ito-ios CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulator-unsigned
+          path: /tmp/ito-ios/Build/Products/Debug-iphonesimulator/App.app
