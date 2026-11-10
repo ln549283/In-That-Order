@@ -1,5 +1,9 @@
 # Livraison et commercialisation — nibylogames
 
+## Plateformes
+
+Distribution commerciale exclusivement sur Google Play (Android) et App Store (iOS), avec interface mobile portrait. Aucune distribution Steam ou PC. La PWA et les archives web sont des outils de test : leur disponibilité ne constitue pas une sortie commerciale web. Les achats et annonces restent réservés aux applications natives configurées.
+
 ## Identité
 
 - Nom : In That Order

@@ -1,4 +1,4 @@
-# Textes de fiche — proposition nibylogames
+# Textes de fiche App Store / Google Play — proposition nibylogames
 
 **Nom :** In That Order
 

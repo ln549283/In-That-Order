@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Ouvrir le serveur annoncé par Vite. Le projet est une application React/TypeScript, installable en PWA et intégrée dans Android/iOS avec Capacitor 8. Les fichiers sources sont dans `src/`, les projets natifs dans `android/` et `ios/`.
+Ouvrir le serveur annoncé par Vite. Le projet utilise React/TypeScript et Capacitor 8. **La commercialisation vise uniquement les mobiles Android (Google Play) et iOS (App Store). Aucune version Steam ou PC n’est prévue. La PWA installable sert uniquement aux tests.** Son affichage reste en format mobile portrait, y compris depuis un navigateur de bureau. Les fichiers sources sont dans `src/`, les projets natifs dans `android/` et `ios/`.
 
 ```sh
 npm test
@@ -22,6 +22,10 @@ npm run mobile:sync
 ```
 
 Les tests navigateur utilisent Chromium (`/usr/bin/chromium` ici). Ailleurs, fournir `CHROMIUM_PATH` pointant sur Chrome/Chromium. La compilation web se trouve dans `dist/` ; la servir en HTTP(S), ne pas ouvrir directement `index.html` avec file://. L’installation PWA exige HTTPS ou une origine locale de développement.
+
+## Direction visuelle
+
+Interface casual colorée : violet, corail et turquoise, cartes de personnages différenciées, boutons en relief et police arrondie Nunito embarquée pour fonctionner hors ligne. Mise en page mobile en une colonne ; orientation portrait dans les projets natifs.
 
 ## Fonctionnalités
 

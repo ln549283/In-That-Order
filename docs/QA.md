@@ -12,6 +12,7 @@ Les résultats ci-dessous proviennent de commandes réellement exécutées dans 
 - Égalités, première position, minorité avec zéro vote, objectif individuel, ordres invalides, verrous incohérents et sauvegarde corrompue.
 - Achat annulé/en attente, restauration et révocation, premium sans publicité, consentement refusé, vidéo interrompue et récompense unique : **SDK natifs simulés dans les tests**, aucun paiement réel.
 - **6 parcours Chromium** : première réussite et niveau suivant ; relecture sans farming ; indice conservé après rechargement ; aide gratuite ; achat web indisponible ; clavier ; glisser-déposer tactile émulé ; annulation ; sélection en deux touchers ; interruption de vote ; réinitialisation conservant les verrous.
+- Refonte casual mobile : accueil, plateau, chapitres, fenêtres et icônes recolorés ; police Nunito embarquée. Cadre de test limité à 480 px sur ordinateur, mention PWA de test. Boutons de vote et indice entièrement visibles avec cinq personnages à 390×844.
 - Écrans testés : 390×844, 320×740, 1365×950. Vérification d’absence de débordement horizontal et captures dans `release/screenshots/`.
 - Compilation TypeScript et Vite de production.
 - **Hors ligne réel dans Chromium** : service worker installé, réseau coupé, rechargement, résolution, récompense, passage au niveau suivant et nouvelle reprise après rechargement.

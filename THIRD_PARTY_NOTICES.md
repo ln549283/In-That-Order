@@ -1,6 +1,6 @@
 # Third-party notices
 
-The original game code, vector portraits, logo and synthesized sounds were created for nibylogames. No third-party illustration or audio files are embedded. Emoji glyphs and system fonts are supplied by the device.
+The original game code, vector portraits, logo and synthesized sounds were created for nibylogames. No third-party illustration or audio files are embedded. Emoji glyphs are supplied by the device. The bundled Nunito variable font is distributed under SIL Open Font License 1.1; its complete license and copyright are included in `public/third-party-licenses.txt`.
 
 Direct runtime dependencies installed for this release:
 
@@ -15,6 +15,7 @@ Direct runtime dependencies installed for this release:
 | @dnd-kit/core | 6.3.1 | MIT |
 | @dnd-kit/sortable | 10.0.0 | MIT |
 | @dnd-kit/utilities | 3.2.2 | MIT |
+| @fontsource-variable/nunito | 5.3.0 | SIL OFL 1.1 |
 | @revenuecat/purchases-capacitor | 14.1.0 | MIT |
 | lucide-react | 0.468.0 | ISC |
 | react | 19.3.1 | MIT |
